@@ -3,9 +3,9 @@ from .views import LaunchesView, nextLaunches, lastLaunches, nextLaunch, lastLau
 
 
 urlpatterns = [
-    url('all_launches/', LaunchesView),
-    url('next_launch/', nextLaunch),
-    url('last_launch/', lastLaunch),
-    url('next_launches/', nextLaunches),
-    url('last_launches/', lastLaunches)
+    url('all_launches/$', LaunchesView),
+    url(r'next_launch/$', nextLaunch),
+    url(r'last_launch/$', lastLaunch),
+    url('next_launches/$', nextLaunches),
+    url('last_launches/$', lastLaunches)
 ]
