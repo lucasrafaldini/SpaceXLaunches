@@ -110,6 +110,17 @@ localhost:3000/last-launches
 
 ---
 
+### TO-DO's
+
+- [ ] Tests
+- [ ] Docker Image
+- [ ] Isolate CSS
+- [ ] Make a cache database
+- [ ] Put a queue system between backend and SpaceX API
+
+
+---
+
 ## License
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
