@@ -38,8 +38,9 @@
   "author": "Lucas Rafaldini",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.4.0",
+    "eslint": "^6.6.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-react": "^7.20.3"
+    "eslint-plugin-react": "^7.20.3",
+    "husky": "^4.2.5"
   }
 }

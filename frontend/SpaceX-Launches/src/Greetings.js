@@ -8,15 +8,14 @@ class Greetings extends Component {
     return (
       // JSX HERE !!!
       <div>
-      <Navbar />
-      <br></br>
-      <br></br>
-      <br></br>
-      <Howdy />
-      <br></br>
-      <br></br>
-      <br></br>
-      <Footer />
+        <br></br>
+        <br></br>
+        <br></br>
+        <Howdy />
+        <br></br>
+        <br></br>
+        <br></br>
+        <Footer />
       </div>
     );
   }
