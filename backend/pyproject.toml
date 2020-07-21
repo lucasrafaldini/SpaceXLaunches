@@ -1,0 +1,28 @@
+[tool.black]
+line-length = 80
+target-version = ['py37']
+quiet = true
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.venv
+  | _build
+  | build
+  | dist
+  | .envrc
+  | .coveragerc
+  | infra
+  | image
+  | entrypoints
+  | conf
+  | .github
+  | templates
+  | .direnv
+  | [a-z_]+/migrations
+  | alia/settings.py
+  | manage.py
+)/
+'''
