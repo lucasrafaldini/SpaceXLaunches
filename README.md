@@ -1,26 +1,21 @@
-# 
-
+#
 
 # SpaceXLaunches
 
 > A clean webpage to check launches by Space X.
 
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) 
-
+[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger)
 
 ## Table of Contents
 
-
 - [Installation](#installation)
 - [License](#license)
-
 
 ---
 
 ## Installation
 
 - The project runs with Django as Backend and React as Frontend so if you're trying to run an example, you will need to run both of they. You can check how it is done at [Setup](#setup)
-
 
 ### Clone
 
@@ -61,7 +56,7 @@ localhost:8000/api/last_launches
 
 - Now it's time to run our frontend:
 
-> Go inside 'frontend/react-api/' folder and start npm:
+> Go inside 'frontend/SpaceX-Launches/' folder and start npm:
 
 ```shell
 $ npm start
@@ -95,10 +90,11 @@ localhost:3000/last-launches
 ### Step 1
 
 - **Option 1**
-    - 🍴 Fork this repo!
+
+  - 🍴 Fork this repo!
 
 - **Option 2**
-    - 👯 Clone this repo to your local machine using `https://github.com/joanaz/HireDot2.git`
+  - 👯 Clone this repo to your local machine using `https://github.com/joanaz/HireDot2.git`
 
 ### Step 2
 
@@ -117,7 +113,6 @@ localhost:3000/last-launches
 - [ ] Isolate CSS
 - [ ] Make a cache database
 - [ ] Put a queue system between backend and SpaceX API
-
 
 ---
 
