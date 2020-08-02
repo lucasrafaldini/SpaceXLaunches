@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import BaseLaunches from './BaseLaunches';
-import BaseLaunch from './BaseLaunch';
-import BaseAllNext from './BaseAllNext';
-import BaseAllLast from './BaseAllLast';
-import Greetings from './Greetings';
+import BaseLaunches from './BaseLaunches.jsx';
+import BaseLaunch from './BaseLaunch.jsx';
+import BaseAllNext from './BaseAllNext.jsx';
+import BaseAllLast from './BaseAllLast.jsx';
+import Greetings from './Greetings.jsx';
 import Navbar from './components/navbar'
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
