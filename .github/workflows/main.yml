@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Super Linter
+name: Space X Launches Workflow
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -35,5 +35,5 @@ jobs:
           echo test, and deploy your project.
 
       # Runs Github Linter
-      - name: Super-Linter
-        uses: github/super-linter@v3.2.0
+      # - name: Super-Linter
+      #   uses: github/super-linter@v3.2.0
