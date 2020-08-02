@@ -1,3 +1,0 @@
-#!/home/rafaldini/Desktop/Lucas/SpaceXLaunches/backend/.backend/bin/python3
-from requirements_detector.run import run
-run()

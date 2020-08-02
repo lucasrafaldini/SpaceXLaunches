@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import (
+from .apis import (
     LaunchesView,
     nextLaunches,
     lastLaunches,
