@@ -19,7 +19,7 @@
 
 ### Clone
 
-- Clone this repo to your local machine using `https://github.com/lucasrafaldini/SpaceXLaunches`
+- Clone this repo to your local machine using `https://github.com/lucasrafaldini/SpaceXLaunches.git`
 
 ### Setup
 
@@ -94,7 +94,7 @@ localhost:3000/last-launches
   - 🍴 Fork this repo!
 
 - **Option 2**
-  - 👯 Clone this repo to your local machine using `https://github.com/joanaz/HireDot2.git`
+  - 👯 Clone this repo to your local machine using `https://github.com/lucasrafaldini/`
 
 ### Step 2
 
