@@ -1,17 +1,14 @@
-from django.conf.urls import url
+from django.urls import re_path
 from .apis import (
-    LaunchesView,
-    nextLaunches,
-    lastLaunches,
-    nextLaunch,
-    lastLaunch,
+    SpaceXViews,
 )
 
+service_instance = SpaceXViews()
 
 urlpatterns = [
-    url(r"all_launches/$", LaunchesView),
-    url(r"next_launch/$", nextLaunch),
-    url(r"last_launch/$", lastLaunch),
-    url(r"next_launches/$", nextLaunches),
-    url(r"last_launches/$", lastLaunches),
+    re_path(r"all_launches/$", service_instance.launches_view),
+    re_path(r"next_launch/$", service_instance.next_launch),
+    re_path(r"last_launch/$", service_instance.last_launch),
+    re_path(r"next_launches/$", service_instance.next_launches),
+    re_path(r"last_launches/$", service_instance.last_launches),
 ]

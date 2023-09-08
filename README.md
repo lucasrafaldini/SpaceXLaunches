@@ -67,6 +67,7 @@ $ npm start
 ```shell
 $ npm init
 $ npm install
+$ npm start
 ```
 
 > Everything should run smoothly by then, so you can text its pages:
