@@ -1,9 +1,9 @@
 from django.urls import re_path
 from .apis import (
-    SpaceXViews,
+    SpaceXView,
 )
 
-service_instance = SpaceXViews()
+service_instance = SpaceXView()
 
 urlpatterns = [
     re_path(r"all_launches/$", service_instance.launches_view),
