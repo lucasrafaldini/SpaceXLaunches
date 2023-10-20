@@ -2,7 +2,7 @@ asgiref==3.7.2
 certifi==2023.7.22
 chardet==5.2.0
 charset-normalizer==3.3.0
-Django==4.2.5
+Django==4.2.6
 django-cors-headers==4.2.0
 idna==3.4
 pytz==2023.3.post1
