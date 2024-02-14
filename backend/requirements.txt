@@ -5,7 +5,7 @@ charset-normalizer==3.3.2
 Django==5.0.1
 django-cors-headers==4.3.1
 idna==3.6
-pytz==2023.3.post1
+pytz==2024.1
 requests==2.31.0
 sqlparse==0.4.4
 style==1.1.6
