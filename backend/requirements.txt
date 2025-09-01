@@ -9,5 +9,5 @@ pytz==2025.2
 requests==2.32.4
 sqlparse==0.5.3
 style==1.1.6
-typing_extensions==4.14.1
+typing_extensions==4.15.0
 urllib3==2.5.0
