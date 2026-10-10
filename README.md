@@ -1,124 +1,72 @@
-#
+# SpaceX Orbital
 
-# SpaceXLaunches
+> Todos os objetos da SpaceX em órbita, em tempo real, num globo 3D. Incluindo o lixo que ela deixou lá em cima.
 
-> A clean webpage to check launches by Space X.
+![Versão](https://img.shields.io/badge/vers%C3%A3o-2.0.0-a3824f?style=flat-square)
+![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-16140f?style=flat-square)
 
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger)
+## Um pouco de história
 
-## Table of Contents
+Este repositório foi um dos meus primeiros projetos de frontend. A versão original, de 2019, era uma página simples com React e um backend Django que listava os lançamentos passados e futuros da SpaceX. Na época, a empresa estava no auge do hype: foguetes pousando de pé, Falcon Heavy levando um Tesla para o espaço, a promessa de Marte logo ali.
 
-- [Installation](#installation)
-- [License](#license)
+Sete anos depois, o projeto ganhou uma versão 2, escrita lado a lado com agentes de IA, numa geração de ferramentas que mal existia quando a primeira foi feita. A SpaceX também mudou: virou dona de mais da metade dos satélites ativos do planeta com a Starlink, ao mesmo tempo em que acumula estágios abandonados, desconfiança e um brilho bem menos inocente do que em 2019. A v2 tenta mostrar as duas coisas: o tamanho do avanço e o rastro que ele deixa.
 
----
+A v1 continua no histórico do Git, para quem quiser ver de onde isso saiu.
 
-## Installation
+## O que tem na v2
 
-- The project runs with Django as Backend and React as Frontend so if you're trying to run an example, you will need to run both of they. You can check how it is done at [Setup](#setup)
+- **Mais de 11 mil objetos SpaceX ao vivo**: toda a constelação Starlink, estágios Falcon 9 / Falcon Heavy, fragmentos e cápsulas Dragon, propagados com SGP4 e animados a 60 fps.
+- **Globo 3D interativo**: zoom pela roda do mouse sincronizado com uma régua de zoom, hover com detalhes e clique para abrir a ficha orbital completa (altitude, velocidade, elementos orbitais e traçado da órbita).
+- **Seguir satélite**: a câmera acompanha o objeto selecionado.
+- **Controle do tempo**: tempo real ou acelerado até 100×.
+- **Filtros** por categoria, altitude, inclinação e busca por nome ou NORAD ID.
+- **"Você sabia?"**: quanto lixo espacial a SpaceX deixou em órbita (massa e volume estimados), convertido em unidades de medida nacionais. Fiat Marea, Uno Mille, estátuas do Borba Gato, Kombis, capivaras, casas nos EUA, apartamentos do Minha Casa Minha Vida e outras. As comparações giram sozinhas e algumas usam a posição ao vivo dos objetos.
 
-### Clone
+## Como rodar
 
-- Clone this repo to your local machine using `https://github.com/lucasrafaldini/SpaceXLaunches.git`
+Requer Node 20+.
 
-### Setup
-
-- First of all, we need to run the backend:
-
-> Go inside 'backend' folder and create a new virtual environment for python to work isolated and properly. After that, activate it:
-
-```shell
-$ sudo virtualenv .spacexenv
-$ source .spacexenv/bin/activate
+```bash
+npm install
+npm run dev
 ```
 
-> Now install all libraries needed to run it using pip and 'requirements.txt':
+Abra http://localhost:3000.
 
-```shell
-$ pip install -r requirements.txt
+```bash
+npm run build     # build de produção em dist/
+npm run preview   # serve o build localmente (com o mesmo proxy de dados)
+npm run lint
 ```
 
-> Everything should run smoothly so you can run it and test it's endpoints:
+## Dados
 
-```shell
-$ python manage.py runserver
-```
+Os elementos orbitais vêm da [CelesTrak](https://celestrak.org):
 
-> To be sure it is running, test the following endpoints (you can test it even at your browser):
+| Fonte | Conteúdo |
+| --- | --- |
+| `sup-gp.php?FILE=starlink` | Constelação Starlink (efemérides fornecidas pela própria SpaceX) |
+| `gp.php?NAME=FALCON` | Estágios e fragmentos de Falcon 9 / Falcon Heavy |
+| `gp.php?NAME=DRAGON` / `NAME=STARSHIP` | Cápsulas Dragon e Starship em órbita |
 
-```shell
-localhost:8000/api/all_launches
-localhost:8000/api/next_launch
-localhost:8000/api/last_launch
-localhost:8000/api/next_launches
-localhost:8000/api/last_launches
-```
+A CelesTrak atualiza os dados a cada 2 horas e bloqueia downloads repetidos nesse intervalo. Por isso há cache em dois níveis:
 
-- Now it's time to run our frontend:
+1. **Servidor** (`vite.config.ts`): um middleware em `/api/celestrak` e `/api/celestrak-sup` guarda as respostas em disco por 2 h e usa a última cópia válida quando a CelesTrak recusa a requisição.
+2. **Navegador**: IndexedDB. Visitas seguintes abrem instantaneamente com o catálogo salvo e atualizam em segundo plano.
 
-> Go inside 'frontend/SpaceX-Launches/' folder and start npm:
+> **Deploy:** em hospedagem estática, as rotas `/api/celestrak*` precisam de um proxy equivalente (uma função serverless, por exemplo) com o mesmo cache.
 
-```shell
-$ npm start
-```
+### Sobre o lixo espacial
 
-> If you are finding some issues at this point, remember to start your npm project and install all its dependencies:
+"Lixo" aqui são os objetos SpaceX sem função catalogados pela CelesTrak: estágios superiores abandonados (`R/B`) e fragmentos (`DEB`). O catálogo público não informa massa, então os números são **estimativas** por tipo de objeto: estágio superior ≈ 4 t, fragmento ≈ 50 kg. As premissas e as unidades de comparação estão em [`src/lib/spaceJunk.ts`](src/lib/spaceJunk.ts).
 
-```shell
-$ npm init
-$ npm install
-$ npm start
-```
+## Como funciona
 
-> Everything should run smoothly by then, so you can text its pages:
+- **Propagação em Web Worker** (`src/workers/propagation.worker.ts`): o SGP4 roda fora da thread principal. A cada tick, o worker envia um buffer compacto com posição e velocidade de cada objeto, e a thread principal extrapola entre os ticks. O movimento fica suave sem propagar 11 mil órbitas a cada quadro.
+- **Renderização** (`src/hooks/useGlobe.ts`): [globe.gl](https://github.com/vasturiano/globe.gl) / three.js. Os satélites são *point sprites* com shader de esfera: um vértice por objeto, numa única chamada de desenho.
+- **Estado**: Zustand. Dados de alta frequência (câmera, hover, posições para o renderizador) ficam fora do React, para não re-renderizar a interface a cada quadro.
+- **Interface**: React 19, Tailwind CSS 4 e TypeScript, com Vite.
 
-```shell
-localhost:3000/
-localhost:3000/launches
-localhost:3000/launch
-localhost:3000/next-launches
-localhost:3000/last-launches
-```
+## Licença
 
----
-
-## Contributing
-
-> Feel free to contribute, but before you get to work, take a look at our issues to make sure you are not goingo to do something someone else is already doing. Feel free to add some issues if you find any bug or if you think I should add some funcionality.
-
-> To start coding this project follow these steps:
-
-### Step 1
-
-- **Option 1**
-
-  - 🍴 Fork this repo!
-
-- **Option 2**
-  - 👯 Clone this repo to your local machine using `https://github.com/lucasrafaldini/`
-
-### Step 2
-
-- **CODE LIKE THERE'S NO TOMORROW!** 🔨🔨🔨
-
-### Step 3
-
-- 🔃 Create a new pull request using <a href="https://github.com/lucasrafaldini/SpaceXLaunches/compare/" target="_blank">`https://github.com/lucasrafaldini/SpaceXLaunches/compare/`</a>.
-
----
-
-### TO-DO's
-
-- [ ] Tests
-- [ ] Docker Image
-- [ ] Isolate CSS
-- [ ] Make a cache database
-- [ ] Put a queue system between backend and SpaceX API
-
----
-
-## License
-
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
-
-- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+[MIT](LICENSE) © 2019–2026 Lucas Rafaldini
