@@ -6,6 +6,7 @@ import { useAppStore } from '../../store/useAppStore';
 import Sidebar from '../Panels/Sidebar';
 import SatellitePanel from '../Panels/SatellitePanel';
 import StatsPanel from '../Panels/StatsPanel';
+import JunkFacts from '../Panels/JunkFacts';
 import TimeControl from '../UI/TimeControl';
 import BrandBar from '../UI/BrandBar';
 import ZoomControl from '../UI/ZoomControl';
@@ -140,6 +141,7 @@ export default function GlobeView() {
 
       {/* Bottom: collapsible data dock + shortcuts */}
       <div className="absolute bottom-4 left-4 z-20 flex flex-col items-start gap-3 pointer-events-none">
+        <JunkFacts />
         <StatsPanel stats={stats} />
       </div>
       <div className="absolute bottom-4 right-4 z-20">
