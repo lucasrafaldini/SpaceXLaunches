@@ -29,7 +29,7 @@
     "oxlint": "^1.81.0",
     "postcss": "^8.5.29",
     "tailwindcss": "^4.3.3",
-    "typescript": "~6.0.2",
+    "typescript": "~7.0.2",
     "vite": "^8.3.0"
   },
   "description": "Rastreamento 3D em tempo real de todos os objetos da SpaceX em órbita"
