@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #16140f;
+  --color-paper: #f7f4ed;
+  --color-paper-2: #efeadf;
+  --color-line: #e2dbcc;
+  --color-muted: #8a8172;
+  --color-gold: #a3824f;
+  --color-gold-light: #c9ad7f;
+  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #050505;
+  color: var(--color-ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Ivory & ink design system: solid surfaces, hairlines, champagne accents ---------- */
+@utility panel {
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(0, 0, 0, 0.35);
+  color: var(--color-ink);
+}
+
+@utility label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+@utility num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1, 'zero' 0;
+}
+
+@utility icon-btn {
+  @apply inline-flex items-center justify-center w-9 h-9 rounded-lg text-ink/60 hover:text-ink hover:bg-ink/[0.06] transition-colors;
+}
+
+@utility chip {
+  @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[12px] border transition-colors select-none cursor-pointer;
+}
+
+@utility input {
+  @apply w-full pl-9 pr-3 py-2 bg-white/60 border border-line rounded-lg text-sm text-ink placeholder-muted/70 focus:outline-none focus:border-gold transition-colors;
+}
+
+@utility btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg text-[13px] font-medium bg-ink text-paper hover:bg-ink/85 transition-colors;
+}
+
+@utility btn-soft {
+  @apply inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg text-[13px] font-medium border border-line text-ink/80 hover:border-ink/30 hover:text-ink transition-colors;
+}
+
+/* Range sliders: hairline track, ink fill, small ivory thumb */
+input[type='range'].slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-ink) 0%, var(--color-ink) var(--pct, 50%), var(--color-line) var(--pct, 50%));
+  cursor: pointer;
+}
+input[type='range'].slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-paper);
+  border: 1.5px solid var(--color-ink);
+  transition: transform 0.15s;
+}
+input[type='range'].slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+input[type='range'].slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-paper);
+  border: 1.5px solid var(--color-ink);
+}
+
+/* Dual-thumb range: two stacked inputs, only the thumbs receive events */
+.dual-range { position: relative; height: 14px; }
+.dual-range .track {
+  position: absolute; top: 6px; left: 0; right: 0; height: 2px; border-radius: 999px;
+  background: var(--color-line);
+}
+.dual-range .fill { position: absolute; top: 0; bottom: 0; background: var(--color-ink); }
+.dual-range input[type='range'] {
+  -webkit-appearance: none; appearance: none; position: absolute; inset: 0; width: 100%;
+  background: transparent; pointer-events: none; margin: 0;
+}
+.dual-range input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none; pointer-events: auto; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--color-paper); border: 1.5px solid var(--color-ink); cursor: grab;
+}
+.dual-range input[type='range']::-moz-range-thumb {
+  pointer-events: auto; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--color-paper); border: 1.5px solid var(--color-ink); cursor: grab;
+}
+
+/* Globe canvas */
+#globe-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Custom scrollbar for panels */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.15);
+  border-radius: 2px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #334155 transparent;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Animation keyframes */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out forwards;
+}
+
+
+
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 1.5px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-pop-in { animation: pop-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+@keyframes junk-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+.junk-progress { animation-name: junk-progress; animation-timing-function: linear; animation-fill-mode: both; }
