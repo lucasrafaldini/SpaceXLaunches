@@ -27,7 +27,7 @@
     "autoprefixer": "^10.6.1",
     "esbuild": "^0.28.2",
     "oxlint": "^1.81.0",
-    "postcss": "^8.5.29",
+    "postcss": "^8.5.30",
     "tailwindcss": "^4.3.3",
     "typescript": "~7.0.2",
     "vite": "^8.3.0"
