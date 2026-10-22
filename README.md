@@ -5,13 +5,19 @@
 ![Versão](https://img.shields.io/badge/vers%C3%A3o-2.0.0-a3824f?style=flat-square)
 ![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-16140f?style=flat-square)
 
+![SpaceX Orbital: globo 3D com a constelação Starlink e o módulo "Você sabia?"](docs/screenshots/v2-overview.jpg)
+
 ## Um pouco de história
 
 Este repositório foi um dos meus primeiros projetos de frontend. A versão original, de 2019, era uma página simples com React e um backend Django que listava os lançamentos passados e futuros da SpaceX. Na época, a empresa estava no auge do hype: foguetes pousando de pé, Falcon Heavy levando um Tesla para o espaço, a promessa de Marte logo ali.
 
 Sete anos depois, o projeto ganhou uma versão 2, escrita lado a lado com agentes de IA, numa geração de ferramentas que mal existia quando a primeira foi feita. A SpaceX também mudou: virou dona de mais da metade dos satélites ativos do planeta com a Starlink, ao mesmo tempo em que acumula estágios abandonados, desconfiança e um brilho bem menos inocente do que em 2019. A v2 tenta mostrar as duas coisas: o tamanho do avanço e o rastro que ele deixa.
 
-A v1 continua no histórico do Git, para quem quiser ver de onde isso saiu.
+| v1 · 2019 | v2 · 2026 |
+| --- | --- |
+| [![v1: lista de lançamentos](https://raw.githubusercontent.com/wiki/lucasrafaldini/SpaceXLaunches/images/v1/v1-launches.png)](https://github.com/lucasrafaldini/SpaceXLaunches/wiki/Vers%C3%A3o-1-(2019)) | [![v2: satélite selecionado](docs/screenshots/v2-satellite.jpg)](docs/screenshots/v2-satellite.jpg) |
+
+A v1 continua no histórico do Git. Ela tem um artigo próprio na wiki, com capturas e detalhes de como era feita: **[Versão 1 (2019)](https://github.com/lucasrafaldini/SpaceXLaunches/wiki/Vers%C3%A3o-1-(2019))**.
 
 ## O que tem na v2
 
@@ -21,6 +27,18 @@ A v1 continua no histórico do Git, para quem quiser ver de onde isso saiu.
 - **Controle do tempo**: tempo real ou acelerado até 100×.
 - **Filtros** por categoria, altitude, inclinação e busca por nome ou NORAD ID.
 - **"Você sabia?"**: quanto lixo espacial a SpaceX deixou em órbita (massa e volume estimados), convertido em unidades de medida nacionais. Fiat Marea, Uno Mille, estátuas do Borba Gato, Kombis, capivaras, casas nos EUA, apartamentos do Minha Casa Minha Vida e outras. As comparações giram sozinhas e algumas usam a posição ao vivo dos objetos.
+
+## Telas
+
+| Ficha do satélite e traçado da órbita | Filtros |
+| --- | --- |
+| ![Satélite selecionado com ficha orbital](docs/screenshots/v2-satellite.jpg) | ![Painel de filtros aberto](docs/screenshots/v2-filters.jpg) |
+
+<img src="docs/screenshots/v2-voce-sabia.png" alt="Módulo Você sabia? com o lixo espacial da SpaceX" width="320" align="right">
+
+**"Você sabia?"**: o lixo espacial da SpaceX em órbita convertido em unidades brasileiras. As comparações giram a cada 8 segundos.
+
+<br clear="right">
 
 ## Como rodar
 
