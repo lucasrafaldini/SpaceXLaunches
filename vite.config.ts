@@ -74,39 +74,28 @@ function celestrakCache(): Plugin {
 export default defineConfig({
   plugins: [react(), celestrakCache()],
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
+    // The app is WebGL-only: keep three's WebGPU/TSL builds out of the bundle (see the stub for details)
+    alias: [
+      { find: /^three\/webgpu$/, replacement: path.resolve(__dirname, 'src/lib/webgpu-stub.ts') },
+      { find: /^three\/tsl$/, replacement: path.resolve(__dirname, 'src/lib/webgpu-stub.ts') },
+    ],
   },
   worker: {
     format: 'es',
-    plugins: () => [],
-    rollupOptions: {
-      external: ['node:module', 'node:worker_threads', 'node:fs', 'node:path', 'node:url', 'node:crypto', 'node:buffer', 'node:util', 'node:events', 'node:stream', 'node:assert', 'node:constants'],
-      output: {
-        format: 'es',
-      },
-    },
-  },
-  optimizeDeps: {
-    include: ['three', 'globe.gl', 'satellite.js', 'zustand'],
-    exclude: ['@turf/turf'],
   },
   build: {
-    target: 'ES2022',
-    minify: 'esbuild',
-    cssMinify: false,
-    rollupOptions: {
+    target: 'es2022',
+    // three.js and the globe.gl stack are needed up front and are large by nature; split them so
+    // each caches independently across deploys
+    chunkSizeWarningLimit: 800,
+    rolldownOptions: {
       output: {
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            if (id.includes('three')) return 'vendor-three';
-            if (id.includes('globe.gl')) return 'vendor-globe';
-            if (id.includes('satellite.js')) return 'vendor-satellite';
-            if (id.includes('zustand')) return 'vendor-store';
-            if (id.includes('@turf')) return 'vendor-turf';
-            return 'vendor';
-          }
+        codeSplitting: {
+          groups: [
+            { name: 'vendor-three', test: /[\\/]node_modules[\\/]three[\\/]/, priority: 30 },
+            { name: 'vendor-react', test: /[\\/]node_modules[\\/](react|react-dom|scheduler|zustand)[\\/]/, priority: 20 },
+            { name: 'vendor-globe', test: /[\\/]node_modules[\\/]/, priority: 10 },
+          ],
         },
       },
     },
@@ -114,9 +103,5 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
-  },
-  define: {
-    'process.env.NODE_ENV': '"production"',
-    'global': 'globalThis',
   },
 });
