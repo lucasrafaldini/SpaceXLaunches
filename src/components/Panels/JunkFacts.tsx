@@ -21,6 +21,7 @@ export default function JunkFacts() {
   const [open, setOpen] = useState(true);
   const [paused, setPaused] = useState(false);
   const [order, setOrder] = useState<string[]>([]);
+  const [orderFor, setOrderFor] = useState('');
   const [index, setIndex] = useState(0);
   // Bumped on every rotation so the same fact can re-animate when the deck reshuffles
   const [cycle, setCycle] = useState(0);
@@ -30,11 +31,12 @@ export default function JunkFacts() {
   const facts = useMemo(() => buildJunkFacts(summary), [summary]);
   const factIds = facts.map((f) => f.id).join(',');
 
-  // New shuffled order whenever the set of facts changes
-  useEffect(() => {
+  // New shuffled order whenever the set of facts changes (adjusting state during render)
+  if (orderFor !== factIds) {
+    setOrderFor(factIds);
     setOrder(shuffle(factIds.split(',').filter(Boolean)));
     setIndex(0);
-  }, [factIds]);
+  }
 
   useEffect(() => {
     if (paused || !open || order.length === 0) return;

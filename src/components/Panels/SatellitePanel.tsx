@@ -25,6 +25,7 @@ export default function SatellitePanel({ satellite, onClose }: SatellitePanelPro
   const units = useAppStore((s) => s.settings.units);
   const followMode = useAppStore((s) => s.view.followMode);
   const setView = useAppStore((s) => s.setView);
+  const simTime = useAppStore((s) => s.view.currentTime);
   const cat = categoryOf(satellite);
 
   const imperial = units === 'imperial';
@@ -37,7 +38,8 @@ export default function SatellitePanel({ satellite, onClose }: SatellitePanelPro
   const perigeeKm = satellite.perigeeKm || semiMajorKm * (1 - satellite.eccentricity) - 6378.137;
   const altitude = pos?.altitudeKm ?? apogeeKm;
   const period = satellite.periodMin || (satellite.meanMotion ? 1440 / satellite.meanMotion : 0);
-  const epochAgeH = (Date.now() - new Date(satellite.epoch.endsWith('Z') ? satellite.epoch : satellite.epoch + 'Z').getTime()) / 3.6e6;
+  // Age relative to the simulated clock (what the propagation is using)
+  const epochAgeH = (simTime.getTime() - new Date(satellite.epoch.endsWith('Z') ? satellite.epoch : satellite.epoch + 'Z').getTime()) / 3.6e6;
 
   const rows: [string, string][] = [
     ['Inclinação', `${satellite.inclination.toFixed(2)}°`],
@@ -49,7 +51,7 @@ export default function SatellitePanel({ satellite, onClose }: SatellitePanelPro
     ['Arg. do pericentro', `${satellite.argOfPericenter.toFixed(2)}°`],
     ['Movimento médio', `${satellite.meanMotion.toFixed(4)} rev/dia`],
     ['Designador', satellite.objectId || '—'],
-    ['Época dos elementos', `há ${epochAgeH.toFixed(1)} h`],
+    ['Época dos elementos', epochAgeH >= 0 ? `há ${epochAgeH.toFixed(1)} h` : `daqui a ${(-epochAgeH).toFixed(1)} h`],
   ];
 
   return (
