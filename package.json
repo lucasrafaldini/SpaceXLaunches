@@ -6,31 +6,33 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "oxlint",
-    "preview": "vite preview"
+    "lint": "oxlint --deny-warnings",
+    "preview": "vite preview",
+    "typecheck": "tsc -b"
   },
   "dependencies": {
-    "@types/three": "^0.186.0",
     "globe.gl": "^2.46.2",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "satellite.js": "^7.1.0",
     "three": "^0.186.1",
     "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
-    "@types/node": "^26.6.4",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.7",
-    "@vitejs/plugin-react": "^6.1.1",
-    "autoprefixer": "^10.6.1",
-    "esbuild": "^0.28.2",
-    "oxlint": "^1.81.0",
-    "postcss": "^8.5.29",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "oxlint": "^1.89.0",
+    "postcss": "^8.5.31",
     "tailwindcss": "^4.3.3",
-    "typescript": "~7.0.2",
-    "vite": "^8.3.0"
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
   },
-  "description": "Rastreamento 3D em tempo real de todos os objetos da SpaceX em órbita"
+  "description": "Rastreamento 3D em tempo real de todos os objetos da SpaceX em órbita",
+  "engines": {
+    "node": ">=20.19.0"
+  }
 }

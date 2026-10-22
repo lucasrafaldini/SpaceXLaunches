@@ -2,8 +2,22 @@
 
 > Todos os objetos da SpaceX em órbita, em tempo real, num globo 3D. Incluindo o lixo que ela deixou lá em cima.
 
-![Versão](https://img.shields.io/badge/vers%C3%A3o-2.0.0-a3824f?style=flat-square)
-![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-16140f?style=flat-square)
+[![CI](https://img.shields.io/github/actions/workflow/status/lucasrafaldini/SpaceXLaunches/main.yml?branch=main&style=flat-square&label=CI)](https://github.com/lucasrafaldini/SpaceXLaunches/actions/workflows/main.yml)
+[![CodeQL](https://img.shields.io/github/actions/workflow/status/lucasrafaldini/SpaceXLaunches/codeql.yml?branch=main&style=flat-square&label=CodeQL)](https://github.com/lucasrafaldini/SpaceXLaunches/actions/workflows/codeql.yml)
+[![Release](https://img.shields.io/github/v/release/lucasrafaldini/SpaceXLaunches?style=flat-square&label=release&color=a3824f)](https://github.com/lucasrafaldini/SpaceXLaunches/releases/latest)
+[![Licença](https://img.shields.io/github/license/lucasrafaldini/SpaceXLaunches?style=flat-square&label=licen%C3%A7a&color=16140f)](LICENSE)
+[![Último commit](https://img.shields.io/github/last-commit/lucasrafaldini/SpaceXLaunches/main?style=flat-square&label=%C3%BAltimo%20commit&color=16140f)](https://github.com/lucasrafaldini/SpaceXLaunches/commits/main)
+[![Dependabot](https://img.shields.io/badge/dependabot-ativo-a3824f?style=flat-square&logo=dependabot)](.github/dependabot.yml)
+
+[![React](https://img.shields.io/github/package-json/dependency-version/lucasrafaldini/SpaceXLaunches/react/main?style=flat-square&label=React&logo=react&color=16140f)](https://react.dev)
+[![TypeScript](https://img.shields.io/github/package-json/dependency-version/lucasrafaldini/SpaceXLaunches/dev/typescript/main?style=flat-square&label=TypeScript&color=16140f&logo=typescript)](https://www.typescriptlang.org)
+[![Vite](https://img.shields.io/github/package-json/dependency-version/lucasrafaldini/SpaceXLaunches/dev/vite/main?style=flat-square&label=Vite&color=16140f&logo=vite)](https://vite.dev)
+[![three.js](https://img.shields.io/github/package-json/dependency-version/lucasrafaldini/SpaceXLaunches/three/main?style=flat-square&label=three.js&color=16140f&logo=threedotjs)](https://threejs.org)
+[![Tailwind CSS](https://img.shields.io/github/package-json/dependency-version/lucasrafaldini/SpaceXLaunches/dev/tailwindcss/main?style=flat-square&label=Tailwind&color=16140f&logo=tailwindcss)](https://tailwindcss.com)
+[![Node](https://img.shields.io/github/package-json/engines/node/lucasrafaldini/SpaceXLaunches/main?style=flat-square&label=Node&logo=nodedotjs&color=16140f)](.nvmrc)
+[![Dados: CelesTrak](https://img.shields.io/badge/dados-CelesTrak-a3824f?style=flat-square)](https://celestrak.org)
+
+![SpaceX Orbital: globo 3D com a constelação Starlink e o módulo "Você sabia?"](docs/screenshots/v2-overview.jpg)
 
 ## Um pouco de história
 
@@ -11,7 +25,11 @@ Este repositório foi um dos meus primeiros projetos de frontend. A versão orig
 
 Sete anos depois, o projeto ganhou uma versão 2, escrita lado a lado com agentes de IA, numa geração de ferramentas que mal existia quando a primeira foi feita. A SpaceX também mudou: virou dona de mais da metade dos satélites ativos do planeta com a Starlink, ao mesmo tempo em que acumula estágios abandonados, desconfiança e um brilho bem menos inocente do que em 2019. A v2 tenta mostrar as duas coisas: o tamanho do avanço e o rastro que ele deixa.
 
-A v1 continua no histórico do Git, para quem quiser ver de onde isso saiu.
+| v1 · 2019 | v2 · 2026 |
+| --- | --- |
+| [![v1: lista de lançamentos](https://raw.githubusercontent.com/wiki/lucasrafaldini/SpaceXLaunches/images/v1/v1-launches.png)](https://github.com/lucasrafaldini/SpaceXLaunches/wiki/Vers%C3%A3o-1-(2019)) | [![v2: satélite selecionado](docs/screenshots/v2-satellite.jpg)](docs/screenshots/v2-satellite.jpg) |
+
+A v1 continua no histórico do Git. Ela tem um artigo próprio na wiki, com capturas e detalhes de como era feita: **[Versão 1 (2019)](https://github.com/lucasrafaldini/SpaceXLaunches/wiki/Vers%C3%A3o-1-(2019))**.
 
 ## O que tem na v2
 
@@ -22,9 +40,21 @@ A v1 continua no histórico do Git, para quem quiser ver de onde isso saiu.
 - **Filtros** por categoria, altitude, inclinação e busca por nome ou NORAD ID.
 - **"Você sabia?"**: quanto lixo espacial a SpaceX deixou em órbita (massa e volume estimados), convertido em unidades de medida nacionais. Fiat Marea, Uno Mille, estátuas do Borba Gato, Kombis, capivaras, casas nos EUA, apartamentos do Minha Casa Minha Vida e outras. As comparações giram sozinhas e algumas usam a posição ao vivo dos objetos.
 
+## Telas
+
+| Ficha do satélite e traçado da órbita | Filtros |
+| --- | --- |
+| ![Satélite selecionado com ficha orbital](docs/screenshots/v2-satellite.jpg) | ![Painel de filtros aberto](docs/screenshots/v2-filters.jpg) |
+
+<img src="docs/screenshots/v2-voce-sabia.png" alt="Módulo Você sabia? com o lixo espacial da SpaceX" width="320" align="right">
+
+**"Você sabia?"**: o lixo espacial da SpaceX em órbita convertido em unidades brasileiras. As comparações giram a cada 8 segundos.
+
+<br clear="right">
+
 ## Como rodar
 
-Requer Node 20+.
+Requer Node 20.19+ (recomendado: 22, ver `.nvmrc`).
 
 ```bash
 npm install
